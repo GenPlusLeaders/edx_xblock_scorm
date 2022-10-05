@@ -1,5 +1,4 @@
 function ScormXBlock(runtime, element, settings) {
-
   function SCORM_12_API(){
 
     this.LMSInitialize = function(){
@@ -12,6 +11,8 @@ function ScormXBlock(runtime, element, settings) {
 
     this.LMSGetValue = GetValue;
     this.LMSSetValue = SetValue;
+    this.GoToPreviousLocation = GoToPreviousLocation;
+    this.GoToNextLocation = GoToNextLocation;
 
     this.LMSCommit = function() {
         return "true";
@@ -41,6 +42,8 @@ function ScormXBlock(runtime, element, settings) {
 
     this.GetValue = GetValue;
     this.SetValue = SetValue;
+    this.GoToPreviousLocation = GoToPreviousLocation;
+    this.GoToNextLocation = GoToNextLocation;
 
     this.Commit = function() {
         return "true";
@@ -59,9 +62,16 @@ function ScormXBlock(runtime, element, settings) {
     }
   }
 
+  var GoToPreviousLocation = function() {
+    $('.sequence-nav .button-previous', window.parent.document).click();
+  }
+
+  var GoToNextLocation = function() {
+    $('.sequence-nav .button-next', window.parent.document).click();
+  }
+
   var GetValue = function (cmi_element) {
     var handlerUrl = runtime.handlerUrl(element, 'scorm_get_value');
-
     var response = $.ajax({
       type: "POST",
       url: handlerUrl,
