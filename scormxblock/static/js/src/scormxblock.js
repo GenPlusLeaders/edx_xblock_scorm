@@ -2,10 +2,12 @@ function ScormXBlock(runtime, element, settings) {
   function SCORM_12_API(){
 
     this.LMSInitialize = function(){
+      $('.sequence-nav', window.parent.document).slideUp();
       return "true";
     };
 
     this.LMSFinish = function() {
+      $('.sequence-nav', window.parent.document).slideDown();
       return "true";
     };
 
@@ -33,10 +35,12 @@ function ScormXBlock(runtime, element, settings) {
 
   function SCORM_2004_API(){
     this.Initialize = function(){
+      $('.sequence-nav', window.parent.document).slideUp();
       return "true";
     };
 
     this.Terminate = function() {
+      $('.sequence-nav', window.parent.document).slideDown();
       return "true";
     };
 
