@@ -1,17 +1,22 @@
 function ScormXBlock(runtime, element, settings) {
-
   function SCORM_12_API(){
 
     this.LMSInitialize = function(){
+      $('.sequence-nav', window.parent.document).slideUp();
+      // Changes background color to theme blue
+      $('iframe.scorm_object').contents().find('body').css('background-color', '#000f30')
       return "true";
     };
 
     this.LMSFinish = function() {
+      $('.sequence-nav', window.parent.document).slideDown();
       return "true";
     };
 
     this.LMSGetValue = GetValue;
     this.LMSSetValue = SetValue;
+    this.GoToPreviousLocation = GoToPreviousLocation;
+    this.GoToNextLocation = GoToNextLocation;
 
     this.LMSCommit = function() {
         return "true";
@@ -32,15 +37,21 @@ function ScormXBlock(runtime, element, settings) {
 
   function SCORM_2004_API(){
     this.Initialize = function(){
+      $('.sequence-nav', window.parent.document).slideUp();
+      // Changes background color to theme blue
+      $('iframe.scorm_object').contents().find('body').css('background-color', '#000f30')
       return "true";
     };
 
     this.Terminate = function() {
+      $('.sequence-nav', window.parent.document).slideDown();
       return "true";
     };
 
     this.GetValue = GetValue;
     this.SetValue = SetValue;
+    this.GoToPreviousLocation = GoToPreviousLocation;
+    this.GoToNextLocation = GoToNextLocation;
 
     this.Commit = function() {
         return "true";
@@ -59,9 +70,16 @@ function ScormXBlock(runtime, element, settings) {
     }
   }
 
+  var GoToPreviousLocation = function() {
+    $('.sequence-nav .button-previous', window.parent.document).click();
+  }
+
+  var GoToNextLocation = function() {
+    $('.sequence-nav .button-next', window.parent.document).click();
+  }
+
   var GetValue = function (cmi_element) {
     var handlerUrl = runtime.handlerUrl(element, 'scorm_get_value');
-
     var response = $.ajax({
       type: "POST",
       url: handlerUrl,
