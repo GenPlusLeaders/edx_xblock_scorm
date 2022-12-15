@@ -3,6 +3,8 @@ function ScormXBlock(runtime, element, settings) {
 
     this.LMSInitialize = function(){
       $('.sequence-nav', window.parent.document).slideUp();
+      // Changes background color to theme blue
+      $('iframe.scorm_object').contents().find('body').css('background-color', '#000f30')
       return "true";
     };
 
@@ -36,6 +38,8 @@ function ScormXBlock(runtime, element, settings) {
   function SCORM_2004_API(){
     this.Initialize = function(){
       $('.sequence-nav', window.parent.document).slideUp();
+      // Changes background color to theme blue
+      $('iframe.scorm_object').contents().find('body').css('background-color', '#000f30')
       return "true";
     };
 
