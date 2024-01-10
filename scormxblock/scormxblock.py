@@ -294,6 +294,8 @@ class ScormXBlock(XBlock, CompletableXBlockMixin):
     def scorm_set_value(self, data, suffix=""):
         context = {"result": "success"}
         name = data.get("name")
+        if self.runtime.user_is_staff:
+            return {"result": "error"}
 
         if name in ["cmi.core.lesson_status", "cmi.completion_status"]:
             self.lesson_status = data.get("value")
